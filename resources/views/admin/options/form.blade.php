@@ -21,6 +21,5 @@
                     Créer
                 @endif
             </button>
-        </div>
     </form>
 @endsection

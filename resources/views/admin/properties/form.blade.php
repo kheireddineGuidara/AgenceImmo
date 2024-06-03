@@ -31,6 +31,7 @@
             @include('shared.input',['class'=>'col','name'=>'city','label'=>'Ville','value'=> $property->city])
             @include('shared.input',['class'=>'col','name'=>'postal_code','label'=>'Code postal','value'=> $property->postal_code])
         </div>
+        @include('shared.input',['class'=>'col','name'=>'postal_code','label'=>'Code postal','value'=> $property->postal_code])
         @include('shared.checkbox',['name'=>'sold','label'=>'Vendu ?','value'=> $property->sold])
         <div>
             <button class="btn btn-primary">
