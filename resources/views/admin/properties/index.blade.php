@@ -22,7 +22,7 @@
         @foreach($properties as $property)
             <tr>
                 <td>{{$property->title}}</td>
-                <td>{{$property->surface}}</td>
+                <td>{{$property->surface}} m²</td>
                 <td>{{number_format($property->price,thousands_separator: ' ')}}</td>
                 <td>{{$property->city}}</td>
                 <td>
