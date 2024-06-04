@@ -27,7 +27,7 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
                     <a aria-current="page"
-                       href="/" @class(['nav-link','active' => str_contains($route,'property.')])>Biens</a>
+                       href="{{ route('property.index') }}" @class(['nav-link','active' => str_contains($route,'property.')])>Biens</a>
                 </li>
             </ul>
         </div>
