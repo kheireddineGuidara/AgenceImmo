@@ -15,7 +15,7 @@
 
         <div class="mt-4">
             <h4>Intéressé par ce bien ??</h4>
-            <form action="" method="post" class="vstack gap-3">
+            <form action="{{ route('property.contact',$property) }}" method="post" class="vstack gap-3">
                 @csrf
                 <div class="row">
                     @include('shared.input', [ 'class' => 'col','name'=>'firstname','label'=>'Prénom'])
@@ -34,7 +34,7 @@
             </form>
         </div>
         <div class="mt-4">
-        <p> {!! nl2br($property->descrition) !!}</p>
+            <p> {!! nl2br($property->descrition) !!}</p>
             <div class="row">
                 <div class="col-8">
                     <h2>Caractéristiques</h2>

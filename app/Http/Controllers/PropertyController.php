@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchPropertiesRequest;
+use App\Mail\PropertyContactMail;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use App\Http\Requests\PropertyContactRequest;
+use Illuminate\Support\Facades\Mail;
 
 class PropertyController extends Controller
 {
-    public function index(SearchPropertiesRequest $request)
+    public function index(SearchPropertiesRequest $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $query = Property::query()->orderBy('created_at','desc');
+        $query = Property::query()->orderBy('created_at', 'desc');
         if ($price = $request->validated('price')) {
             $query = $query->where('price', '<=', $price);
         }
@@ -29,7 +32,7 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show(string $slug, Property $property)
+    public function show(string $slug, Property $property): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $expectedSlug = $property->getSlug();
         if ($slug !== $expectedSlug) {
@@ -39,8 +42,14 @@ class PropertyController extends Controller
             ]);
         }
         return view('property.show',
-        [
-            'property' => $property
-        ]);
+            [
+                'property' => $property
+            ]);
+    }
+
+    public function contact(Property $property, PropertyContactRequest $request)
+    {
+    Mail::send(new PropertyContactMail($property, $request->validated()));
+    return back()->with('succes','Votre demande de contact a bien été envoyé');
     }
 }
