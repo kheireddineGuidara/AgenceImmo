@@ -27,10 +27,10 @@ class Property extends Model
 
     public function options(): BelongsToMany
     {
-            return $this->belongsToMany(Option::class);
+        return $this->belongsToMany(Option::class);
     }
 
-    public function getSlug() : string
+    public function getSlug(): string
     {
         return \Illuminate\Support\Str::slug($this->title);
     }

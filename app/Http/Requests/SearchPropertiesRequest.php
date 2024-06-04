@@ -22,10 +22,10 @@ class SearchPropertiesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => ['numeric','nullable','gte:0'],
-            'surface' => ['numeric','nullable','gte:0'],
-            'rooms' => ['numeric','nullable','gte:0'],
-            'title' => ['string','nullable']
+            'price' => ['numeric', 'nullable', 'gte:0'],
+            'surface' => ['numeric', 'nullable', 'gte:0'],
+            'rooms' => ['numeric', 'nullable', 'gte:0'],
+            'title' => ['string', 'nullable']
         ];
     }
 }
