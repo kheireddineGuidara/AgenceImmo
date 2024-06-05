@@ -13,6 +13,13 @@
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     <title>@yield('title') | Administration</title>
+    <style>
+    @layer reset {
+    button {
+    all:unset;
+    }
+    }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,30 +44,29 @@
                        href="{{ route('admin.option.index') }}">Gérer les options</a>
                 </li>
             </ul>
+            <div class="ms-auto">
+                @auth
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="nav-link">Se déconnecter</button>
+                            </form>
+                        </li>
+                    </ul>
+                @endauth
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="container mt-5">
-
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul class="my-0">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('shared.flash')
     @yield('content')
 </div>
 <script>
-    new TomSelect('select[multiple]',{plugins:{remove_button:{title:'Supprimer'}}})
+    new TomSelect('select[multiple]', {plugins: {remove_button: {title: 'Supprimer'}}})
 </script>
 </body>
 </html>

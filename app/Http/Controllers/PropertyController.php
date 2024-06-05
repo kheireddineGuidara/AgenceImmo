@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 
 class PropertyController extends Controller
 {
-    public function index(SearchPropertiesRequest $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(SearchPropertiesRequest $request)
     {
         $query = Property::query()->orderBy('created_at', 'desc');
         if ($price = $request->validated('price')) {
@@ -32,10 +32,10 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show(string $slug, Property $property): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function show(string $slug, Property $property)
     {
         $expectedSlug = $property->getSlug();
-        if ($slug !== $expectedSlug) {
+        if ($slug  != $expectedSlug) {
             return to_route('property.show', [
                 'slug' => $expectedSlug,
                 'property' => $property
