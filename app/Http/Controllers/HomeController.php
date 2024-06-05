@@ -16,7 +16,7 @@ class HomeController extends Controller
         $user = User::first();
         $user->password = '123456';
         $user->syncChanges();
-        dd($user->password, $user);
+
         return view('home', ['properties' => $properties]);
     }
 

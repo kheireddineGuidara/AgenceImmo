@@ -14,11 +14,11 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     <title>@yield('title') | Administration</title>
     <style>
-    @layer reset {
-    button {
-    all:unset;
-    }
-    }
+        @layer reset {
+            button {
+                all: unset;
+            }
+        }
     </style>
 </head>
 <body>
@@ -36,8 +36,9 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
                     <a aria-current="page"
-                       href="{{ route('admin.property.index') }}" @class(['nav-link','active' => str_contains($route,'property.')])>Gérer
-                        les biens</a>
+                       href="{{ route('admin.property.index') }}"
+                        @class(['nav-link','active' => str_contains($route,'property.')])>
+                        Gérer les biens</a>
                 </li>
                 <li class="nav-item">
                     <a @class(['nav-link','active' => str_contains($route,'option.')]) aria-current="page"
