@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\OptionController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +16,7 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 $idRegex = '[0-9]+';
 $slugRegex = '[0-9a-z\-]+';
 
@@ -34,16 +35,19 @@ Route::post('/biens/{property/contact', [\App\Http\Controllers\PropertyControlle
         'property' => $idRegex,
     ]);
 
-Route::get('/login', [AuthController::class, 'login'])
-    ->middleware('guest')
-    ->name('login');
-Route::post('/login', [AuthController::class, 'doLogin']);
-Route::delete('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
-    ->name('logout');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth','verified'])->name('admin.')->group(function () {
     Route::resource('property', PropertyController::class)->except(['show']);
     Route::resource('option', OptionController::class)->except(['show']);
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
