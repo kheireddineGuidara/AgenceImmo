@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PropertyFormRequest;
 use App\Models\Option;
 use App\Models\Property;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ class PropertyController extends Controller
 
     public function index()
     {
+        dd(Auth::user());
         return view('admin.properties.index', [
             'properties' => Property::orderBy('created_at', 'desc')
                 ->withTrashed()
