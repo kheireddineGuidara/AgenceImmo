@@ -41,7 +41,7 @@
             @endforelse
         </div>
         <div class="my-4">
-            {{ $properties->links() }}
+            {{ $properties->appends(request()->query())->links() }}
         </div>
     </div>
 

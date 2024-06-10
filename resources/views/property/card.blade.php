@@ -1,4 +1,5 @@
 <div class="card">
+    <img src="/storage/{{$property->image}}" style="max-width: 100%; height: auto;" class="card-img-top" alt="Image de la propriété">
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ route('property.show',['slug' => $property->getSlug(), 'property' => $property]) }}">{{ $property->title }}</a>

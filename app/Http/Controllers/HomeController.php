@@ -17,13 +17,7 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        $properties = Property::available()->orderBy('created_at', 'desc')->limit(4)->get();
-        /** @var User $user */
-        $user = User::first();
-        $user->password = Hash::make('000000');
-        $user->save();
-
+        $properties = Property::available()->orderBy('created_at','desc')->limit(4)->get();
         return view('home', ['properties' => $properties]);
     }
 }

@@ -22,12 +22,13 @@
                 <td>
                     <div class="d-flex gap-2  w-100 justify-content-end">
                         <a href="{{ route('admin.option.edit', $option) }}" class="btn btn-primary">Editer</a>
-                        <form action="{{ route('admin.option.destroy',$option) }}" method="post">
+                        @can("delete", $option)
+                        <form action="{{ route('admin.option.destroy',$option) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
                             @csrf
                             @method("delete")
-                            <button class="btn btn-danger">Supprimer</button>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
-
+                        @endcan
                     </div>
                 </td>
             </tr>

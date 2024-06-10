@@ -6,7 +6,7 @@
 
     <h1>@yield('title')</h1>
 
-    <form class="vstack gap-2"
+    <form class="vstack gap-2" enctype="multipart/form-data"
           action="{{ route ($property->exists ? 'admin.property.update' : 'admin.property.store' , $property ) }} "
           method="post">
         @csrf
@@ -20,7 +20,10 @@
             </div>
 
         </div>
-        @include('shared.input',[ 'type'=>'textarea' , 'class'=>'col' , 'name'=>'description' , 'value'=> $property->description])
+        <div class="row">
+            @include('shared.image', ['class' => 'col','name' => 'image','label' => 'Image','type' => 'file'])
+            @include('shared.input',[ 'type'=>'textarea' , 'class'=>'col' , 'name'=>'description' , 'value'=> $property->description])
+        </div>
         <div class="row">
             @include('shared.input',['class'=>'col','name'=>'rooms','label'=>'Pièces','value'=> $property->rooms])
             @include('shared.input',['class'=>'col','name'=>'bedrooms','label'=>'Chambres','value'=> $property->bedrooms])

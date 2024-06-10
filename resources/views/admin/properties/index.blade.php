@@ -29,10 +29,10 @@
                     <div class="d-flex gap-2  w-100 justify-content-end">
                         <a href="{{ route('admin.property.edit', $property) }}" class="btn btn-primary">Editer</a>
                         @can("delete", $property)
-                        <form action="{{ route('admin.property.destroy',$property) }}" method="post">
+                        <form action="{{ route('admin.property.destroy',$property) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
                             @csrf
                             @method("delete")
-                            <button class="btn btn-danger">Supprimer</button>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                         @endcan
                     </div>

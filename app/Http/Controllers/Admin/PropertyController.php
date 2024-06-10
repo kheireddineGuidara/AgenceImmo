@@ -8,6 +8,7 @@ use App\Models\Option;
 use App\Models\Property;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
@@ -20,7 +21,6 @@ class PropertyController extends Controller
 
     public function index()
     {
-        dd(Auth::user());
         return view('admin.properties.index', [
             'properties' => Property::orderBy('created_at', 'desc')
                 ->withTrashed()
@@ -34,15 +34,6 @@ class PropertyController extends Controller
     public function create()
     {
         $property = new Property();
-        $property->fill([
-            'surface' => 40,
-            'rooms' => 3,
-            'bedrooms' => 1,
-            'floor' => 0,
-            'city' => 'Sfax',
-            'postal_code' => 3020,
-            'sold' => false,
-        ]);
         return view('admin.properties.form', [
             'property' => $property,
             'options' => Option::pluck('name', 'id'),
@@ -59,14 +50,6 @@ class PropertyController extends Controller
         return to_route('admin.property.index')->with('success', 'Le bien a bien été créé');
     }
 
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Property $property)
     {
         return view('admin.properties.form', [
@@ -80,7 +63,13 @@ class PropertyController extends Controller
      */
     public function update(PropertyFormRequest $request, Property $property)
     {
-        $property->update($request->validated());
+        $data = $request->validated();
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image !== null && !$image->getError()) {
+            $data['image'] = $image->store('property', 'public');
+        }
+        $property->update($data);
         $property->options()->sync($request->validated('options'));
         return to_route('admin.property.index')->with('success', 'Le bien a bien été modifié');
     }

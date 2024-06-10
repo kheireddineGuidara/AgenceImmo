@@ -12,16 +12,17 @@
         </div>
 
         <hr>
-
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="mt-4">
             <h4>Intéressé par ce bien ??</h4>
-
-            @include('shared.flash')
 
             <form action="{{ route('property.contact',$property) }}" method="post" class="vstack gap-3">
                 @csrf
                 <div class="row">
-                    <x-input class="col" name="firstname" label="prénom" value=""/>
                     @include('shared.input', [ 'class' => 'col','name'=>'firstname','label'=>'Prénom'])
                     @include('shared.input', [ 'class' => 'col','name'=>'lastname','label'=>'Nom'])
                 </div>
@@ -30,6 +31,9 @@
                     @include('shared.input', [ 'type' => 'email','class' => 'col','name'=>'email','label'=>'Email'])
                 </div>
                 @include('shared.input', [ 'type' => 'textarea','class' => 'col','name'=>'message','label'=>'Votre message'])
+                @if($property->image)
+                    <img style="width: 100%; height: 150px; object-fit: cover;" src="/storage/{{$property->image}}" alt="">
+                @endif
                 <div>
                     <button class="btn btn-primary">
                         Nous contacter

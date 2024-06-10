@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ContactRequestEvent;
 use App\Http\Requests\SearchPropertiesRequest;
 use App\Mail\PropertyContactMail;
 use App\Models\Property;
@@ -14,28 +15,34 @@ class PropertyController extends Controller
     public function index(SearchPropertiesRequest $request)
     {
         $query = Property::query()->orderBy('created_at', 'desc');
-        if ($price = $request->validated('price')) {
+        $input = $request->validated();
+
+        if ($price = $input['price'] ?? null) {
             $query = $query->where('price', '<=', $price);
         }
-        if ($surface = $request->validated('surface')) {
+        if ($surface = $input['surface'] ?? null) {
             $query = $query->where('surface', '>=', $surface);
         }
-        if ($rooms = $request->validated('rooms')) {
+        if ($rooms = $input['rooms'] ?? null) {
             $query = $query->where('rooms', '>=', $rooms);
         }
-        if ($title = $request->validated('title')) {
+        if ($title = $input['title'] ?? null) {
             $query = $query->where('title', 'like', "%{$title}%");
         }
+
+        $properties = $query->paginate(16)->appends($input);
+
         return view('property.index', [
-            'properties' => $query->paginate(16),
-            'input' => $request->validated()
+            'properties' => $properties,
+            'input' => $input
         ]);
     }
+
 
     public function show(string $slug, Property $property)
     {
         $expectedSlug = $property->getSlug();
-        if ($slug  != $expectedSlug) {
+        if ($slug != $expectedSlug) {
             return to_route('property.show', [
                 'slug' => $expectedSlug,
                 'property' => $property
@@ -49,7 +56,7 @@ class PropertyController extends Controller
 
     public function contact(Property $property, PropertyContactRequest $request)
     {
-    Mail::send(new PropertyContactMail($property, $request->validated()));
-    return back()->with('succes','Votre demande de contact a bien été envoyé');
+        event(new ContactRequestEvent($property,$request->validated()));
+        return back()->with('succes', 'Votre demande de contact a bien été envoyé');
     }
 }

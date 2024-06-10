@@ -3,7 +3,7 @@
         {{ session('success') }}
     </div>
 @endif
-@if($errors->any())
+ @if($errors->any())
     <div class="alert alert-danger">
         <ul class="my-0">
             @foreach($errors->all() as $error)
