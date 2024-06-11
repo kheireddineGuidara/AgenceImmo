@@ -49,7 +49,7 @@
                 <li class="nav-item">
                     <a @class(['nav-link', 'active' => $route === 'property.index'])
                        aria-current="page" href="{{ route('property.index') }}">
-                        Biens
+                        Explorer nos biens
                     </a>
                 </li>
             </ul>

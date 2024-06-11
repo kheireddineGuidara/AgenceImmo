@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\ContactRequestEvent;
 use App\Http\Requests\SearchPropertiesRequest;
-use App\Mail\PropertyContactMail;
 use App\Models\Property;
-use Illuminate\Http\Request;
 use App\Http\Requests\PropertyContactRequest;
-use Illuminate\Support\Facades\Mail;
 
 class PropertyController extends Controller
 {

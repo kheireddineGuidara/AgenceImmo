@@ -21,14 +21,16 @@
                 <td>{{$option->name}}</td>
                 <td>
                     <div class="d-flex gap-2  w-100 justify-content-end">
-                        <a href="{{ route('admin.option.edit', $option) }}" class="btn btn-primary">Editer</a>
-                        @can("delete", $option)
-                        <form action="{{ route('admin.option.destroy',$option) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
-                            @csrf
-                            @method("delete")
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                        @endcan
+                        @if(Auth::user()->isAdmin() || Auth::user()->id == $option->user_id)
+                            <a href="{{ route('admin.option.edit', $option) }}" class="btn btn-primary">Editer</a>
+
+                            <form action="{{ route('admin.option.destroy',$option) }}" method="post"
+                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
+                                @csrf
+                                @method("delete")
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        @endif
                     </div>
                 </td>
             </tr>

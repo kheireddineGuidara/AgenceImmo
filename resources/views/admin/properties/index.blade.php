@@ -27,14 +27,15 @@
                 <td>{{$property->city}}</td>
                 <td>
                     <div class="d-flex gap-2  w-100 justify-content-end">
-                        <a href="{{ route('admin.property.edit', $property) }}" class="btn btn-primary">Editer</a>
-                        @can("delete", $property)
-                        <form action="{{ route('admin.property.destroy',$property) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
-                            @csrf
-                            @method("delete")
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                        @endcan
+                        @if(Auth::user()->isAdmin() || Auth::user()->id == $property->user_id)
+                            <a href="{{ route('admin.property.edit', $property) }}" class="btn btn-primary">Editer</a>
+                            <form action="{{ route('admin.property.destroy',$property) }}" method="post"
+                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
+                                @csrf
+                                @method("delete")
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        @endif
                     </div>
                 </td>
             </tr>

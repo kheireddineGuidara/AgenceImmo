@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OptionFormRequest;
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OptionController extends Controller
 {
@@ -33,23 +34,25 @@ class OptionController extends Controller
      */
     public function store(OptionFormRequest $request,)
     {
-        $option = Option::create($request->validated());
-        return to_route('admin.option.index')->with('success', "L'option a bien été créé");
+        $option = new Option($request->validated());
+        $option->user_id = Auth::id();
+        $option->save();
+        return to_route('admin.option.index')
+            ->with('success', "L'option a bien été créé");
     }
 
-    /**
-     * Display the specified resource.
-     */
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Option $option)
     {
-        return view('admin.options.form', [
-            'option' => $option
-        ]);
+        $user = Auth::user();
+        if ($user->role == 'admin' || $user->id == $option->user_id) {
+            return view('admin.options.form', [
+                'option' => $option
+            ]);
+        } else {
+            return redirect()->route('admin.option.index')
+                ->with('error', 'Vous n\'avez pas la permission de modifier cette option.');
+        }
     }
 
     /**
@@ -57,8 +60,17 @@ class OptionController extends Controller
      */
     public function update(OptionFormRequest $request, Option $option)
     {
-        $option->update($request->validated());
-        return to_route('admin.option.index')->with('success', "L'option a bien été modifié");
+        $user = Auth::user();
+
+        if ($user->role == 'admin' || $user->id == $option->user_id) {
+            $option->update($request->validated());
+            return to_route('admin.option.index')
+                ->with('success', "L'option a bien été modifié");
+        } else {
+            return redirect()
+                ->route('admin.option.index')
+                ->with('error', 'Vous n\'avez pas la permission de modifier cette option.');
+        }
     }
 
     /**
@@ -67,7 +79,8 @@ class OptionController extends Controller
     public function destroy(Option $option)
     {
         $option->delete();
-        return to_route('admin.option.index')->with('success', "L'option a bien été supprimée");
+        return to_route('admin.option.index')
+            ->with('success', "L'option a bien été supprimée");
 
     }
 }

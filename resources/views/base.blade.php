@@ -29,7 +29,7 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 @auth
                     <li class="nav-item">
-                        <a  @class(['nav-link', 'active' => $route === 'admin.property.index'])
+                        <a @class(['nav-link', 'active' => $route === 'admin.property.index'])
                            aria-current="page" href="{{ route('admin.property.index') }}">
                             Gérer les biens
                         </a>
@@ -44,13 +44,16 @@
                 <li class="nav-item">
                     <a @class(['nav-link', 'active' => $route === 'property.index'])
                        aria-current="page" href="{{ route('property.index') }}">
-                        Biens
+                        Explorer nos biens
                     </a>
                 </li>
             </ul>
             <div class="ms-auto">
                 @auth
                     <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                        </li>
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf

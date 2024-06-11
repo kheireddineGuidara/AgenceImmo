@@ -10,39 +10,61 @@
         <div class="text-primary fw-bold" style="font-size: 4rem;">
             {{ number_format($property->price, thousands_separator: ' ') }} DNT
         </div>
-
+        @auth
+            @if(Auth::check() && Auth::user()->isAdmin() || Auth::user()->id == $property->user_id)
+                <div class="d-flex gap-2 w-100 justify-content-end">
+                    <a href="{{ route('admin.property.edit', $property) }}" class="btn btn-primary">Editer</a>
+                    <form action="{{ route('admin.property.destroy', $property) }}" method="post"
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette option ?');">
+                        @csrf
+                        @method("delete")
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            @endif
+        @endauth
         <hr>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-        <div class="mt-4">
-            <h4>Intéressé par ce bien ??</h4>
+        @guest
+            <div class="mt-4">
+                <h4>{{ __('interested in the property :title ?',['title' => $property->title]) }}
+                    <h4>
 
-            <form action="{{ route('property.contact',$property) }}" method="post" class="vstack gap-3">
-                @csrf
-                <div class="row">
-                    @include('shared.input', [ 'class' => 'col','name'=>'firstname','label'=>'Prénom'])
-                    @include('shared.input', [ 'class' => 'col','name'=>'lastname','label'=>'Nom'])
-                </div>
-                <div class="row">
-                    @include('shared.input', [ 'class' => 'col','name'=>'phone','label'=>'Téléphone'])
-                    @include('shared.input', [ 'type' => 'email','class' => 'col','name'=>'email','label'=>'Email'])
-                </div>
-                @include('shared.input', [ 'type' => 'textarea','class' => 'col','name'=>'message','label'=>'Votre message'])
-                @if($property->image)
-                    <img style="width: 100%; height: 150px; object-fit: cover;" src="/storage/{{$property->image}}" alt="">
-                @endif
-                <div>
-                    <button class="btn btn-primary">
-                        Nous contacter
-                    </button>
-                </div>
-            </form>
-        </div>
+                        <form action="{{ route('property.contact',$property) }}" method="post" class="vstack gap-3">
+                            @csrf
+                            <div class="row">
+                                @include('shared.input', [ 'class' => 'col','name'=>'firstname','label'=>'Prénom'])
+                                @include('shared.input', [ 'class' => 'col','name'=>'lastname','label'=>'Nom'])
+                            </div>
+                            <div class="row">
+                                @include('shared.input', [ 'class' => 'col','name'=>'phone','label'=>'Téléphone'])
+                                @include('shared.input', [ 'type' => 'email','class' => 'col','name'=>'email','label'=>'Email'])
+                            </div>
+                            @include('shared.input', [ 'type' => 'textarea','class' => 'col','name'=>'message','label'=>'Votre message'])
+                            @if($property->image)
+                                <img style="width: 100%; height: 150px; object-fit: cover;"
+                                     src="/storage/{{$property->image}}"
+                                     alt="">
+                            @endif
+                            <div>
+                                <button class="btn btn-primary">
+                                    Nous contacter
+                                </button>
+                            </div>
+                        </form>
+            </div>
+        @endguest
+        @auth
+            @if($property->image)
+                <img style="width: 100%; height: 150px; object-fit: cover;" src="/storage/{{$property->image}}" alt="">
+            @endif
+        @endauth
         <div class="mt-4">
-            <p> {!! nl2br($property->descrition) !!}</p>
+            <p> {!! nl2br($property->description) !!}</p>
             <div class="row">
                 <div class="col-8">
                     <h2>Caractéristiques</h2>

@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class Property extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
 
     protected $fillable = [
         'title',
@@ -43,5 +43,10 @@ class Property extends Model
     public function scopeAvailable(Builder $builder): Builder
     {
         return $builder->where('sold',false);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
