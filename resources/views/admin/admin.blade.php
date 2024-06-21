@@ -20,6 +20,7 @@
             }
         }
     </style>
+    @livewireStyles
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -70,9 +71,11 @@
 </nav>
 
 <div class="container mt-5">
+
     @include('shared.flash')
     @yield('content')
 </div>
+@livewireScripts
 <script>
     new TomSelect('select[multiple]', {plugins: {remove_button: {title: 'Supprimer'}}})
 </script>

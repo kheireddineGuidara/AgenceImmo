@@ -13,6 +13,7 @@
             crossorigin="anonymous"></script>
 
     <title>@yield('title') | Agence Imo</title>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
