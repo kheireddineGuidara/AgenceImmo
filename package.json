@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.3"
+        "bootstrap": "^5.3.3",
+        "tiny-slider": "^2.9.4"
     }
 }
