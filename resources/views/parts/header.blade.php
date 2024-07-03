@@ -1,6 +1,8 @@
 <!-- Start Header/Navigation -->
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-
+    @php
+        $route = request()->route()->getName();
+;    @endphp
     <div class="container">
         <a class="navbar-brand" href="{{route('home')}}">Agence Immo<span>.</span></a>
 
@@ -11,22 +13,28 @@
 
         <div class="navbar-collapse" id="navbarsFurni">
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                <li class="nav-item">
+                <li @class(['nav-item', 'active' => $route == 'home'])>
                     <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('about-us')}}">About us</a>
+                <li @class(['nav-item', 'active' => $route == 'about-us'])>
+                    <a class="nav-link" href="{{route('about-us')}}">About
+                        us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Our goods</a>
+                <li @class(['nav-item', 'active' => $route == 'home'])>
+                    <a class="nav-link" href="{{route('home')}}">Our
+                        goods</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Contact us</a>
+                <li @class(['nav-item', 'active' => $route == 'home'])>
+                    <a class="nav-link" href="{{route('home')}}">Contact
+                        us</a>
                 </li>
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li><a class="nav-link" href="#"><img src="{{ Vite::asset('resources/images/user.svg')}}"></a></li>
+                <li><a class="nav-link" href="{{route('login')}}">
+                        <img src="{{ Vite::asset('resources/images/user.svg')}}">
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

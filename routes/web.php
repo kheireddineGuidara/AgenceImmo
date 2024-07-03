@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect()->route('home');
+});
 Route::prefix('fo')->group(function () {
 
     $idRegex = '[0-9]+';
