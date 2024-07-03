@@ -21,8 +21,6 @@
     ])
 </head>
 <body>
-@include('parts.header')
 @yield('content')
-@include('parts.footer')
 </body>
 </html>

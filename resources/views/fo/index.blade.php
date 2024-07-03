@@ -1,6 +1,4 @@
 @extends('base-fo')
-<body>
-@include('parts.header')
 @section('content')
 
     <!-- Start Why Choose Us Section -->
@@ -16,7 +14,8 @@
                         <div class="col-6 col-md-6">
                             <div class="feature">
                                 <div class="icon">
-                                   <img src=" {{ Vite::asset('resources/images/truck.svg')}}" alt="Image" class="imf-fluid">
+                                    <img src=" {{ Vite::asset('resources/images/truck.svg')}}" alt="Image"
+                                         class="imf-fluid">
                                 </div>
                                 <h3>Fast &amp; Free Shipping</h3>
                                 <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
@@ -27,7 +26,8 @@
                         <div class="col-6 col-md-6">
                             <div class="feature">
                                 <div class="icon">
-                                    <img src="   {{ Vite::asset('resources/images/bag.svg')}}" alt="Image" class="imf-fluid">
+                                    <img src="   {{ Vite::asset('resources/images/bag.svg')}}" alt="Image"
+                                         class="imf-fluid">
                                 </div>
                                 <h3>Easy to Shop</h3>
                                 <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
@@ -38,7 +38,8 @@
                         <div class="col-6 col-md-6">
                             <div class="feature">
                                 <div class="icon">
-                                    <img src="   {{ Vite::asset('resources/images/support.svg')}}" alt="Image" class="imf-fluid">
+                                    <img src="   {{ Vite::asset('resources/images/support.svg')}}" alt="Image"
+                                         class="imf-fluid">
                                 </div>
                                 <h3>24/7 Support</h3>
                                 <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
@@ -49,7 +50,8 @@
                         <div class="col-6 col-md-6">
                             <div class="feature">
                                 <div class="icon">
-                                    <img src="   {{ Vite::asset('resources/images/return.svg')}}" alt="Image" class="imf-fluid">
+                                    <img src="   {{ Vite::asset('resources/images/return.svg')}}" alt="Image"
+                                         class="imf-fluid">
                                 </div>
                                 <h3>Hassle Free Returns</h3>
                                 <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
@@ -104,7 +106,5 @@
         </div>
     </div>
     <!-- End We Help Section -->
-
-@section('content')
-    @include('parts.footer')
+@endsection
 

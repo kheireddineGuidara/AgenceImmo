@@ -1,6 +1,4 @@
 @extends('base-fo')
-<body>
-@include('parts.header')
 @section('content')
 
     <!-- Start Why Choose Us Section -->
@@ -106,5 +104,3 @@
     <!-- End We Help Section -->
 
 @section('content')
-    @include('parts.footer')
-
