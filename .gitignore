@@ -19,3 +19,4 @@ yarn-error.log
 # Ignore PhpStorm project files
 .idea/
 *.iml
+*.tmp
