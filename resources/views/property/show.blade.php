@@ -32,7 +32,7 @@
         @guest
             <div class="mt-4">
                 <h4>{{ __('interested in the property :title ?',['title' => $property->title]) }}
-                    <h4>
+                    </h4>
 
                         <form action="{{ route('property.contact',$property) }}" method="post" class="vstack gap-3">
                             @csrf

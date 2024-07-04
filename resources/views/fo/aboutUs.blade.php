@@ -101,6 +101,4 @@
             </div>
         </div>
     </div>
-    <!-- End We Help Section -->
-
-@section('content')
+@endsection

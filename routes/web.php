@@ -29,7 +29,8 @@ Route::prefix('fo')->group(function () {
     Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
     Route::get('/properties', [HomeController::class, 'properties']);
 
-    Route::get('/biens', [\App\Http\Controllers\PropertyController::class, 'index'])->name('property.index');
+    Route::get('/goods', [\App\Http\Controllers\PropertyController::class, 'index'])->name('fo.goods');
+
     Route::get('/biens/{slug}-{property}', [\App\Http\Controllers\PropertyController::class, 'show'])
         ->name('property.show')
         ->where([

@@ -29,7 +29,7 @@ class PropertyController extends Controller
 
         $properties = $query->paginate(16)->appends($input);
 
-        return view('property.index', [
+        return view('fo.goods', [
             'properties' => $properties,
             'input' => $input
         ]);

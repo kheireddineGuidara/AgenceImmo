@@ -16,16 +16,16 @@
                 <li @class(['nav-item', 'active' => $route == 'home'])>
                     <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
-                <li @class(['nav-item', 'active' => $route == 'about-us'])>
-                    <a class="nav-link" href="{{route('about-us')}}">About
-                        us</a>
-                </li>
-                <li @class(['nav-item', 'active' => $route == 'home'])>
-                    <a class="nav-link" href="{{route('home')}}">Our
+                <li @class(['nav-item', 'active' => $route == 'fo.goods'])>
+                    <a class="nav-link" href="{{route('fo.goods')}}">Our
                         goods</a>
                 </li>
                 <li @class(['nav-item', 'active' => $route == 'home'])>
                     <a class="nav-link" href="{{route('home')}}">Contact
+                        us</a>
+                </li>
+                <li @class(['nav-item', 'active' => $route == 'about-us'])>
+                    <a class="nav-link" href="{{route('about-us')}}">About
                         us</a>
                 </li>
             </ul>
