@@ -27,7 +27,8 @@ Route::prefix('fo')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
-    Route::get('/properties', [HomeController::class, 'properties']);
+    Route::get('/properties', [HomeController::class, 'properties'])->name('properties');
+    Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contact-us');
 
     Route::get('/goods', [\App\Http\Controllers\PropertyController::class, 'index'])->name('fo.goods');
 

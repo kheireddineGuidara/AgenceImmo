@@ -1,4 +1,4 @@
-@extends('admin.admin')
+@extends('base-fo')
 
 @section('title','Tous les biens')
 

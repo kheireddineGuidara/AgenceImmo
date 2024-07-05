@@ -26,4 +26,9 @@ class HomeController extends Controller
         $properties = Property::available()->orderBy('created_at', 'desc')->limit(4)->get();
         return view('home', ['properties' => $properties]);
     }
+
+    public function contactUs()
+    {
+        return view('fo.contact');
+    }
 }

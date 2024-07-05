@@ -12,6 +12,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Http\Request;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -20,17 +21,9 @@ class FilamentServiceProvider extends ServiceProvider
         //
     }
 
-    public function boot()
+    public function boot(Request $request)
     {
-        Filament::serving(function () {
-            Filament::authMiddleware([
-                Authenticate::class,
-                EnsureUserIsAdmin::class,
-            ]);
 
-            Filament::registerRenderHook('body.start', function () {
-                return view('layouts.partials.notifications');
-            });
-        });
+
     }
 }
